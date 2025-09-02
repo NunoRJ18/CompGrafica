@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar testImage05.cpp",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-O3",
+                "testImage05.cpp",
+                "Image.o",
+                "-o",
+                "a.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
+
