@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <list>
 #include <numeric>
-#include "VertexUtils.h"
+#include <vector>
 
 // previous iterator (wrapping around) 
 template<class It>
