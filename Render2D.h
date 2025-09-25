@@ -47,14 +47,26 @@ struct Render2D{
        	// calcule as coordenadas baricêntricas
        	// use essas coordenadas para interpolar os atributos (use a função mix_triangle)
        	// pinte o pixel com os atributos interpolados
-		std::vector<Pixel> pixels = rasterizeTriangle(tri);
-         for(Pixel p : pixels)
+
+		vec2 P[3] ={
+			get2DPosition(tri[0]),
+			get2DPosition(tri[1]),
+			get2DPosition(tri[2])
+		};
+
+		vec2 L[3] ={
+			toScreen(P[0]),
+			toScreen(P[1]),
+			toScreen(P[2])
+		};
+
+		std::vector<Pixel> pixels = rasterizeTriangle(L);
+         for(Pixel i : pixels)
 		 {
-             vec2 bc = barycentric_coords(toVec2(p), toVec2(triangle[0]), toVec2(triangle[1]), toVec2(triangle[2]));
-             Varying v = mix_triangle(tri, bc);
-             vec3 color = shader.fragment(v);
-             setPixel(p.x, p.y, color);
-		}
+             vec3 bc = barycentric_coords(toVec2(i),P);
+             Varying v = mix_triangle(bc,tri);
+			 paint(i, v);
+		 }
 	}
 
 	vec2 toScreen(vec2 P) const{
